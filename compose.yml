@@ -3,6 +3,8 @@ services:
     container_name: mern-social
     image: mern-social
     restart: always
+    depends_on:
+      - mern-social-db
     environment:
       IP: mern-social-db
     build: ./mern-social
