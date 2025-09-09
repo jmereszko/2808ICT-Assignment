@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: assignment
+
+resources:
+  - namespace.yaml
+  - mern-social-deployment.yaml
+  - mern-social-service.yaml
+  - mongo-db-deployment.yaml
+  - mongo-db-service.yaml
+
