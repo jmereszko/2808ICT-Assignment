@@ -14,3 +14,14 @@ resources:
   - mongo-express-service.yaml
   - nginx-deployment.yaml
   - nginx-service.yaml
+
+configMapGenerator:
+  - name: nginx-config
+    files:
+      - nginx/nginx.conf
+
+secretGenerator:
+  - name: nginx-certs
+    files:
+      - nginx/certs/localhost.crt
+      - nginx/certs/localhost.key
