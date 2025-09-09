@@ -21,7 +21,7 @@ kubectl apply -f mongo-express-service.yml
 kubectl apply -f nginx-deployment.yml
 kubectl apply -f nginx-service.yml
 
-sleep 20
+sleep 60
 sudo -E kubectl port-forward svc/nginx-service 80:80 443:443 --address 0.0.0.0 &
 
 eval $(minikube docker-env -u)
