@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-db  # Deployment name
+  namespace: assignment   # Put it in the 'assignment' namespace
+spec:
+  replicas: 1       # Run a single MongoDB pod
+  selector:
+    matchLabels:
+      app: mongo-db   # Deployment manages pods with this label
+  template:
+    metadata:
+      labels:
+        app: mongo-db # Label the Pod so Service can find it
+    spec:
+      containers:
+        - name: mongo               # Name of this container inside the Pod
+          image: mongo:4.2          # Use MongoDB version 4.2 image (matches mern-social's README)
+
+          args:                     # Command-line flags passed to 'mongod'
+            - "--bind_ip_all"       # Allow MongoDB to accept connections from any IP (needed in Kubernetes)
+            - "--wiredTigerCacheSizeGB=0.25"  # Limit WiredTiger cache size to ~256 MiB
+                                           # (This ensures Mongo fits under the memory limit comfortably)
+
+          ports:
+            - containerPort: 27017  # Expose MongoDB’s default TCP port inside the Pod
+                                    # (the Service will map traffic to this)
+
+          readinessProbe:           # Tells Kubernetes when Mongo is ready to serve requests
+            tcpSocket:
+              port: 27017           # Probe just checks if TCP port is open
+            initialDelaySeconds: 8  # Wait 8 seconds after container starts before checking
+            periodSeconds: 5        # Then check every 5 seconds
+
+          resources:
+            limits:
+              memory: "512Mi"       # Hard cap: MongoDB cannot use more than 512 MiB RAM
+                                    # → Protects the Minikube VM from being eaten by Mongo
+                                    # Note: no 'requests' here, so this Pod is Burstable class
+                                    # (simpler for dev; K8s will schedule it if *any* memory is free)
