@@ -1,6 +1,6 @@
 # Dockerfile 
 # (use this version of node because that's whats in the mern-social repo)
-FROM node:8.11.1
+FROM node:13.12.0
 
 # Create a directory inside the image to hold the app's code
 RUN mkdir -p /usr/src/app
