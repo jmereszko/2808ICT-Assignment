@@ -11,13 +11,13 @@ WORKDIR /usr/src/app
 # Copy only package.json first,
 # this way, if dependencies havent changed, Docker can reuse the layer
 # And skip reinstalling modules.
-COPY package.json /usr/src/app
+COPY package*.json ./
 
 # Install app dependencies (from package.json)
 RUN npm install
 
 # Copy the rest of the application code into the container
-COPY . /usr/src/app
+COPY . .
 
 # Build the React client bundle (runs "npm run build" defined in pakage.json
 # This prepares static files that the Express server can serve.
