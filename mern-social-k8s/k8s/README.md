@@ -31,7 +31,7 @@ They also control external access (via Service type):
 ports:
     - port: 3000        # this is the Service's own port. Other Pods can now use this port to talk to your Service. IE entry point on the service's stable IP.
     targetPort: 3000    # this is the port inside the Pod's container to which traffic should be forwarded. Usually matches the containerPort your app listens on. IE destination inside the Pod.
-    nodePort: 32000     # Only exists when Service is NodePort type. Opens a port one very node's external IP. Lets you connect from outside the cluster. Its a doorway into the cluster from your laptop/the internet.
+    nodePort: 32000     # Only exists when Service is NodePort type. Opens a port one every node's external IP. Lets you connect from outside the cluster. Its a doorway into the cluster from your laptop/the internet.
 ```
 ## namespace.yaml
 Creates the namespace needed for this cluster (assignment)
