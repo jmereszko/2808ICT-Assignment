@@ -36,3 +36,7 @@ spec:
             limits:
               memory: "512Mi"       # Hard cap: MongoDB cannot use more than 512 MiB RAM
                                     # Protects the Minikube VM from being eaten by Mongo
+      volumes:  # Link the Pod to the PVC
+        - name: mongo-storage
+          persistentVolumeClaim:
+            claimName: mongo-pvc
