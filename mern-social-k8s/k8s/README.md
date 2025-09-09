@@ -1,7 +1,7 @@
 # K8S YAML FILES
 
 
-## Deployments (general idea):
+# Deployments (general idea):
 Tells k8s how many replicas of a Pod to run.
 K8s creates and manages the Pods based on the template.
 If the Pod crashes or the node dies, the Deployment automatically re-creates it.
