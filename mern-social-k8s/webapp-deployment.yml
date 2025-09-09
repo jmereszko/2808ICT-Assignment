@@ -20,6 +20,6 @@ spec:
           imagePullPolicy: Never
           env:
           - name: IP
-            value: "mern-social-db"
+            value: "mongo-service"
           ports:
           - containerPort: 3000

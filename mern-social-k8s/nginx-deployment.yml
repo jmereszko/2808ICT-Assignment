@@ -21,9 +21,22 @@ spec:
             - containerPort: 80
             - containerPort: 443
           volumeMounts:
-            - name: nginx-all
-              mountPath: /etc/nginx
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+            - name: nginx-crt
+              mountPath: /etc/nginx/certs/localhost.crt
+              subPath: localhost.crt                                          2 lines ]
+            - name: nginx-key
+              mountPath: /etc/nginx/private/localhost.key
+              subPath: localhost.key
       volumes:
-        - name: nginx-all
+        - name: nginx-config
           configMap:
-            name: nginx-all
+            name: nginx-config
+        - name: nginx-crt
+          secret:
+            secretName: nginx-certs
+        - name: nginx-key
+          secret:
+            secretName: nginx-certs
