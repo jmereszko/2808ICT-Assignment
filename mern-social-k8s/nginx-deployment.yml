@@ -26,7 +26,7 @@ spec:
               subPath: nginx.conf
             - name: nginx-crt
               mountPath: /etc/nginx/certs/localhost.crt
-              subPath: localhost.crt                                          2 lines ]
+              subPath: localhost.crt
             - name: nginx-key
               mountPath: /etc/nginx/private/localhost.key
               subPath: localhost.key
