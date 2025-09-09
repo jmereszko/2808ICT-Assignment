@@ -13,6 +13,16 @@ spec:
       labels:
         app: mern-social           # Pod label (must match selector above!)
     spec:
+
+      # Init containers runs first, before the main app container starts.
+      initContainers:
+        - name: wait-for-mongo
+          image: busybox:1.36      # Tiny image with shell + netcat
+          command: ['sh', '-c', 'until nc -z mongo-db 27017; do echo "Waiting for Mongo..."; sleep 2; done']
+          # Explanation:
+          # nc -z mongo-db 27017 → check if TCP port 27017 is open on the mongo-db Service
+          # If not, sleep 2s and try again, looping until success.
+
       containers:
         - name: mern-social        # Container name (we decide this)
           image: mern-social:local # Docker image to run (built earlier into Minikube when we did the setup stuff)

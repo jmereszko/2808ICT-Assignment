@@ -35,6 +35,4 @@ spec:
           resources:
             limits:
               memory: "512Mi"       # Hard cap: MongoDB cannot use more than 512 MiB RAM
-                                    # → Protects the Minikube VM from being eaten by Mongo
-                                    # Note: no 'requests' here, so this Pod is Burstable class
-                                    # (simpler for dev; K8s will schedule it if *any* memory is free)
+                                    # Protects the Minikube VM from being eaten by Mongo
