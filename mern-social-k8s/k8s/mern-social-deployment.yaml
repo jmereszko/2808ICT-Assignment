@@ -14,13 +14,12 @@ spec:
         app: mern-social           # Pod label (must match selector above!)
     spec:
       containers:
-        - name: mern-social        # Container name (arbitrary, but should be meaningful)
-          image: mern-social:local # Image to run (built earlier into Minikube)
+        - name: mern-social        # Container name (we decide this)
+          image: mern-social:local # Docker image to run (built earlier into Minikube when we did the setup stuff)
           imagePullPolicy: Never   # Tell K8s NOT to pull from Docker Hub — use local image
           ports:
-            - containerPort: 3000  # The port the app listens on inside the container
-          env:                     # Environment variables for the app
-            - name: MONGO_URI
+            - containerPort: 3000  # The port the app listens on inside the container (set to 3000 because that's what mern-social is configured for in its source code)
+          env:                     # Environment variables for the app. The required env variables for mern-social are located in mern-social/config/config.js
+            - name: MONGO_URI # Tells the app where MongoDB is (node.js backend in mern-social expects a variable like this to connect to a db. instead of pointing to localhost, point it to the MongoDB service inside of k8s)
               value: mongodb://mern-mongo.mern.svc.cluster.local:27017/mernsocial
               # Connection string to MongoDB Service running in the same namespace
-
