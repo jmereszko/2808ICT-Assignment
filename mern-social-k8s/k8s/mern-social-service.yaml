@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service         # tells k8s what  type of object is being created. We want a Service for this because we are trying to handle communication between different Pods (we want MongoDB to be able to communicate with mern-social)
+metadata:
+  name: mern-social
+  namespace: assignment
+spec:
+  type: NodePort      # we to be able to go to http://{ip}:{port}/ and access the mern-social app on a web browser on this device.
+  selector:
+    app: mern-social
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+      nodePort: 32000
+

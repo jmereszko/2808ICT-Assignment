@@ -51,6 +51,13 @@ We are giving METADATA that says information such as `spec: containers: -name: m
 ### mern-social-service.yaml
 Sets up the Service
 
-This actually handles networking stuff, so it exposes port 3000 which
+We want one thing:
+1) for us to be able to go to http://{minikube-ip}:32000/ and access the mern-social app on a web browser on this device.  
 
+`http://{minikube-ip}:32000/` means "send traffic to Minikube's VM at port 32000".
 
+(minikube is just a small k8s cluster running on a machine btw)
+
+By setting `NodePort: 32000`, we give k8s a rule:
+- "Any traffic hitting the cluster's node on port 32000 goes to the `mern-social` Service.".
+This is the entry point from OUTSIDE the cluster (think application layer. one application (w3m browser, for example) can now communicate with the k8s cluster, which is its own application.)
