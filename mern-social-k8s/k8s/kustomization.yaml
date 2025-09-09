@@ -10,4 +10,5 @@ resources:
   - mongo-pvc.yaml
   - mongo-db-deployment.yaml
   - mongo-db-service.yaml
-
+  - mongo-express-deployment.yaml
+  - mongo-express-service.yaml

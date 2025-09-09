@@ -1,0 +1,15 @@
+apiVersion: v1                       # We're using the core v1 API for Services
+kind: Service                        # This manifest defines a Service object
+metadata:
+  name: mongo-express-service        # Name of the Service (unique within the namespace)
+
+spec:
+  type: NodePort                     # Change from default (ClusterIP) to NodePort so the Mongo Express admin/debug UI can be accessed in a browser.
+  selector:
+    app: mongo-express               # This Service will route traffic to Pods with this label
+
+  ports:
+    - protocol: TCP                  # Use TCP (standard for HTTP traffic)
+      port: 8081                     # Port that the Service exposes inside the cluster
+      targetPort: 8081               # Port on the Pod container that traffic is forwarded to
+      nodePort: 32001                # External port to access the admin/debug UI with.
