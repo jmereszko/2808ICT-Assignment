@@ -1,5 +1,7 @@
 #!/bin/bash
 
+minikube start
+
 eval $(minikube docker-env)
 docker build -t mern-social ./mern-social
 
