@@ -13,6 +13,9 @@ kubectl -n assignment get pods # where assignment is the k8s namespace
 kubectl -n assignment logs deploy/mern-social
 ```
 
+You can do this for our stuff:
+`kubectl apply -k k8s/`
+because I defined a kustomization.yaml file that declares the order to apply the objects. This makes sure the assignment namespace is created first, so you dont have to do that.
 # Services (general idea):
 A service is a stable network endpoint that sits in front of one or more Pods.
 
