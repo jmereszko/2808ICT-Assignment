@@ -25,6 +25,9 @@ spec:
           ports:
             - containerPort: 27017  # Expose MongoDB’s default TCP port inside the Pod
                                     # (the Service will map traffic to this)
+          volumeMounts:             # Specify WHERE in the container's filesystem a volume should be mounted.
+            - name: mongo-storage   # this referes to the volume defined below.
+              mountPath: /data/db   # this mounts that volume at /data/db, which is MongoDB's default data directory. This means all db files MongoDB writes will go to that volume.
 
           readinessProbe:           # Tells Kubernetes when Mongo is ready to serve requests
             tcpSocket:
@@ -36,7 +39,7 @@ spec:
             limits:
               memory: "512Mi"       # Hard cap: MongoDB cannot use more than 512 MiB RAM
                                     # Protects the Minikube VM from being eaten by Mongo
-      volumes:  # Link the Pod to the PVC
-        - name: mongo-storage
-          persistentVolumeClaim:
+      volumes:  # Defines at the Pod level what the volume actually is
+        - name: mongo-storage # matches the name used in volumeMounts
+          persistentVolumeClaim: # tells k8s to use the PVC named mongo-pvc
             claimName: mongo-pvc
