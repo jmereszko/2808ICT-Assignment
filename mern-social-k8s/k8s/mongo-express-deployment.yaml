@@ -21,9 +21,9 @@ spec:
           image: mongo-express      # Use the official mongo-express image from Docker Hub
           env:                      # Environment variables for mongo-express configuration
             - name: ME_CONFIG_MONGODB_SERVER
-              value: "mongo-db-service"  # Points to the MongoDB Service name (ClusterIP DNS entry)
+              value: "mongo-db"  # Points to the MongoDB Service name (ClusterIP DNS entry)
             - name: ME_CONFIG_MONGODB_URL
-              value: "mongodb://mongo-db-service:27017" # Full Mongo connection string
+              value: "mongodb://mongo-db:27017" # Full Mongo connection string
             - name: ME_CONFIG_SITE_BASEURL
               value: "/mongo-express/" # Optional: base URL path if served behind reverse proxy
           ports:
