@@ -20,6 +20,10 @@ spec:
           ports:
             - containerPort: 3000  # The port the app listens on inside the container (set to 3000 because that's what mern-social is configured for in its source code)
           env:                     # Environment variables for the app. The required env variables for mern-social are located in mern-social/config/config.js
-            - name: MONGO_URI # Tells the app where MongoDB is (node.js backend in mern-social expects a variable like this to connect to a db. instead of pointing to localhost, point it to the MongoDB service inside of k8s)
+            - name: MONGODB_URI
               value: mongodb://mern-mongo.mern.svc.cluster.local:27017/mernsocial
               # Connection string to MongoDB Service running in the same namespace
+              # This tells the app where MongoDB is (node.js backend in mern-social expects a variable like this to connect to a db. instead of pointing to localhost, point it to the MongoDB service inside of k8s)
+              # Have to overwrite this from mern-social/config/config.yaml because otherwise it defaults to localhost which wont work with k8s
+              # because MongoDB is in a DIFFERENT pod than mern-social, meaning localhost wont work.
+
