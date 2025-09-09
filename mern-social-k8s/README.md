@@ -1,6 +1,6 @@
 # Instructions
 
-## mern-social-db
+## mern-social
 On every restart, need to do this:
 1. start minikube
 `minikube start`
