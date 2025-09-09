@@ -1,0 +1,31 @@
+apiVersion: apps/v1                 # Use the apps/v1 API since this is a Deployment
+kind: Deployment                    # We're defining a Deployment object
+metadata:
+  name: mongo-express-deployment    # Name of the Deployment (unique within the namespace)
+  labels:
+    app: mongo-express              # Label to identify this app (useful for Services/Selectors)
+
+spec:
+  replicas: 1                       # Run a single replica (one Pod) for mongo-express
+  selector:
+    matchLabels:
+      app: mongo-express            # The Deployment manages Pods with this label
+
+  template:                         # Pod template defines how the Pod(s) should look
+    metadata:
+      labels:
+        app: mongo-express          # Pod label (must match selector above)
+    spec:
+      containers:
+        - name: mongo-express       # Name of the container inside the Pod
+          image: mongo-express      # Use the official mongo-express image from Docker Hub
+          env:                      # Environment variables for mongo-express configuration
+            - name: ME_CONFIG_MONGODB_SERVER
+              value: "mongo-service"  # Points to the MongoDB Service name (ClusterIP DNS entry)
+            - name: ME_CONFIG_MONGODB_URL
+              value: "mongodb://mongo-service:27017" # Full Mongo connection string
+            - name: ME_CONFIG_SITE_BASEURL
+              value: "/mongo-express/" # Optional: base URL path if served behind reverse proxy
+          ports:
+            - containerPort: 8081   # Expose port 8081 (default for mongo-express web UI)
+
