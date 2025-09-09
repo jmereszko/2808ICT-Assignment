@@ -2,7 +2,7 @@ apiVersion: apps/v1                # API version for Deployments
 kind: Deployment                   # We're creating a Deployment object
 metadata:
   name: mern-social                # Name of the Deployment (must be unique in the namespace)
-  namespace: mern                  # Namespace to put it in (make sure 'mern' exists)
+  namespace: assignment                  # Namespace to put it in (make sure 'assignment' exists)
 spec:
   replicas: 1                      # Run exactly 1 copy of this Pod (for testing)
   selector:
