@@ -12,3 +12,5 @@ resources:
   - mongo-db-service.yaml
   - mongo-express-deployment.yaml
   - mongo-express-service.yaml
+  - nginx-deployment.yaml
+  - nginx-service.yaml
