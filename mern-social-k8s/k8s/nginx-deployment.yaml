@@ -1,0 +1,38 @@
+apiVersion: apps/v1                    # Use the apps/v1 API because this is a Deployment
+kind: Deployment                       # We are creating a Deployment object
+metadata:
+  name: nginx-deployment               # Unique name for this Deployment
+  labels:
+    app: nginx                         # Label to identify this Deployment (used by Services)
+
+spec:
+  replicas: 1                          # Run a single Pod replica of Nginx
+  selector:
+    matchLabels:
+      app: nginx                       # This Deployment will manage Pods with this label
+
+  template:                            # Pod template (defines how the Pod should look)
+    metadata:
+      labels:
+        app: nginx                     # Pod label (must match the selector above)
+
+    spec:
+      containers:
+        - name: nginx                  # Name of the container inside the Pod
+          image: nginx:latest          # Use the latest official Nginx image from Docker Hub
+
+          ports:
+            - containerPort: 80        # Expose HTTP port
+            - containerPort: 443       # Expose HTTPS port
+
+          volumeMounts:                # Mount configuration and certificates into the container
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf  # Mount our custom nginx.conf file
+              subPath: nginx.conf              # subPath ensures only this file is mounted
+            - name: nginx-crt
+              mountPath: /etc/nginx/certs/localhost.crt  # Mount the TLS certificate file
+              subPath: localhost.crt
+            - name: nginx-key
+              mountPath: /etc/nginx/private/localhost.key # Mount the TLS private key file
+              subPath: localhost.key
+

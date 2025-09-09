@@ -1,0 +1,18 @@
+apiVersion: v1                 # Use the core v1 API for Services
+kind: Service                  # Define a Service object
+metadata:
+  name: nginx-service          # Name of the Service (unique within the namespace)
+
+spec:
+  type: LoadBalancer           # Expose the Service externally (in cloud providers this provisions a load balancer)
+  selector:
+    app: nginx                 # Route traffic to Pods with the label "app: nginx"
+
+  ports:                       # Define the ports exposed by this Service
+    - name: http
+      port: 80                 # Port exposed by the Service inside the cluster (HTTP)
+      targetPort: 80           # Forward traffic to containerPort 80 in the Nginx Pod
+    - name: https
+      port: 443                # Port exposed by the Service inside the cluster (HTTPS)
+      targetPort: 443          # Forward traffic to containerPort 443 in the Nginx Pod
+
