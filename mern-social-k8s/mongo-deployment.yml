@@ -20,10 +20,9 @@ spec:
         ports:
         - containerPort: 27017
         volumeMounts:
-        - name: mongo-data
+        - name: mongo-storage
           mountPath: /data/db
       volumes:
-      - name: mongo-data
-        hostPath:
-          path: ./mern-social-db
-          type: DirectoryOrCreate
+      - name: mongo-storage
+        persistentVolumeClaim:
+          claimName: mongo-pvc
