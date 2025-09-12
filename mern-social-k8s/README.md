@@ -1,5 +1,15 @@
 # Instructions
 
+
+Note, any timey ou make a change to a deployment or service, you have to reapply it 
+```
+kubectl apply -k ./k8s
+```
+and then run
+
+```
+kubectl rollout restart deployment mern-social -n assignment
+```
 ## mern-social
 On every restart, need to do this:
 1. start minikube

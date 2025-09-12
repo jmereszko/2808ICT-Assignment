@@ -1,0 +1,45 @@
+apiVersion: apps/v1                    # Use the apps/v1 API because this is a Deployment
+kind: Deployment                       # We are creating a Deployment object
+metadata:
+  name: nginx-deployment               # Unique name for this Deployment
+  labels:
+    app: nginx                         # Label to identify this Deployment (used by Services)
+
+spec:
+  replicas: 1                          # Run a single Pod replica of Nginx
+  selector:
+    matchLabels:
+      app: nginx                       # This Deployment will manage Pods with this label
+
+  template:                            # Pod template (defines how the Pod should look)
+    metadata:
+      labels:
+        app: nginx                     # Pod label (must match the selector above)
+
+    spec:
+      containers:
+        - name: nginx                  # Name of the container inside the Pod
+          image: nginx:latest          # Use the latest official Nginx image from Docker Hub
+
+          ports:
+            - containerPort: 80        # Expose HTTP port
+            - containerPort: 443       # Expose HTTPS port
+          volumeMounts:                        # Defines how volumes are mounted into the container filesystem
+            - name: nginx-config               # Reference to the volume named "nginx-config"
+              mountPath: /etc/nginx/nginx.conf # Mount the file into the container at this exact path
+              subPath: nginx.conf              # Only mount the single file "nginx.conf" from the ConfigMap
+            - name: nginx-certs                # Reference to the volume named "nginx-certs"
+              mountPath: /etc/nginx/certs/localhost.crt # Path inside the container where the certificate will be mounted
+              subPath: localhost.crt           # Only mount the "localhost.crt" file from the Secret
+            - name: nginx-certs
+              mountPath: /etc/nginx/private/localhost.key # Path inside the container for the private key
+              subPath: localhost.key           # Only mount the "localhost.key" file from the Secret
+
+      volumes:                             # Declares the actual volumes available to the Pod
+        - name: nginx-config               # A volume named "nginx-config"
+          configMap:                       # This volume comes from a ConfigMap
+            name: nginx-config             # Uses the ConfigMap named "nginx-config"
+        - name: nginx-certs                # A volume named "nginx-certs"
+          secret:                          # This volume comes from a Secret
+            secretName: nginx-certs        # Uses the Secret named "nginx-certs"
+

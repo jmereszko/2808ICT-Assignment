@@ -1,6 +1,6 @@
 # Dockerfile 
 # (use this version of node because that's whats in the mern-social repo)
-FROM node:8.11.1
+FROM node:13.12.0
 
 # Create a directory inside the image to hold the app's code
 RUN mkdir -p /usr/src/app
@@ -11,13 +11,13 @@ WORKDIR /usr/src/app
 # Copy only package.json first,
 # this way, if dependencies havent changed, Docker can reuse the layer
 # And skip reinstalling modules.
-COPY package.json /usr/src/app
+COPY package*.json ./
 
 # Install app dependencies (from package.json)
 RUN npm install
 
 # Copy the rest of the application code into the container
-COPY . /usr/src/app
+COPY . .
 
 # Build the React client bundle (runs "npm run build" defined in pakage.json
 # This prepares static files that the Express server can serve.

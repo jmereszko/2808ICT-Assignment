@@ -1,0 +1,39 @@
+apiVersion: apps/v1                # API version for Deployments
+kind: Deployment                   # We're creating a Deployment object
+metadata:
+  name: mern-social                # Name of the Deployment (must be unique in the namespace)
+  namespace: assignment                  # Namespace to put it in (make sure 'assignment' exists)
+spec:
+  replicas: 1                      # Run exactly 1 copy of this Pod (for testing)
+  selector:
+    matchLabels:
+      app: mern-social             # Deployment will manage Pods with this label
+  template:                        # Template defines how the Pods should look
+    metadata:
+      labels:
+        app: mern-social           # Pod label (must match selector above!)
+    spec:
+
+      # Init containers runs first, before the main app container starts.
+      initContainers:
+        - name: wait-for-mongo
+          image: busybox:1.36      # Tiny image with shell + netcat
+          command: ['sh', '-c', 'until nc -z mongo-db 27017; do echo "Waiting for Mongo..."; sleep 2; done']
+          # Explanation:
+          # nc -z mongo-db 27017 → check if TCP port 27017 is open on the mongo-db Service
+          # If not, sleep 2s and try again, looping until success.
+
+      containers:
+        - name: mern-social        # Container name (we decide this)
+          image: mern-social:local # Docker image to run (built earlier into Minikube when we did the setup stuff)
+          imagePullPolicy: Never   # Tell K8s NOT to pull from Docker Hub — use local image
+          ports:
+            - containerPort: 3000  # The port the app listens on inside the container (set to 3000 because that's what mern-social is configured for in its source code)
+          env:                     # Environment variables for the app. The required env variables for mern-social are located in mern-social/config/config.js
+            - name: MONGODB_URI
+              value: mongodb://mongo-db:27017/mernsocial
+              # Connection string to MongoDB Service running in the same namespace
+              # This tells the app where MongoDB is (node.js backend in mern-social expects a variable like this to connect to a db. instead of pointing to localhost, point it to the MongoDB service inside of k8s)
+              # Have to overwrite this from mern-social/config/config.yaml because otherwise it defaults to localhost which wont work with k8s
+              # because MongoDB is in a DIFFERENT pod than mern-social, meaning localhost wont work.
+

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-db
+  namespace: assignment
+spec:
+  selector:
+    app: mongo-db
+  ports: # This will be a ClusterIP Service.
+    - port: 27017 # Expose on port 27017 so Pods within the cluster can communicate with mongo-db.assignment.svc.cluster.local:27017
+      targetPort: 27017 # Sends traffic on port 27017 to Pods on this Service listening on port 27017.
