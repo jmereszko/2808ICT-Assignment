@@ -1,43 +1,55 @@
 #!/bin/bash
 API_KEY="MySecretKey123"
-ZAP_BASE="http://localhost:8080"
+ZAP="http://localhost:8080"
+TARGET_APP="https://compose-nginx-1"
+TARGET_ME="https://compose-nginx-1/mongo-express/"
 
-# Helper to wait for an active scan to finish
-wait_for_ascan() {
-  local ID=$1
-  while true; do
-    STATUS=$(curl -s "${ZAP_BASE}/JSON/ascan/view/status/?apikey=${API_KEY}&scanId=${ID}" | jq -r .status)
-    echo "Active scan status: $STATUS%"
-    [ "$STATUS" = "100" ] && break
-    sleep 10
-  done
-}
-
-# -------------------
-# 1. MERN-SOCIAL (scan known routes directly)
-# -------------------
-MERN_URLS=(
-  "https://compose-nginx-1/"
-  "https://compose-nginx-1/signin"
-  "https://compose-nginx-1/signup"
-)
-
-for URL in "${MERN_URLS[@]}"; do
-  echo "[*] Starting Active Scan on MERN-SOCIAL ($URL)"
-  ASCANID=$(curl -s "${ZAP_BASE}/JSON/ascan/action/scan/?apikey=${API_KEY}&url=${URL}&recurse=true&inScopeOnly=false&ignoreCertificateErrors=true" | jq -r .scan)
-  wait_for_ascan $ASCANID
+# Wait for ZAP ready
+echo "[*] Waiting for ZAP..."
+for i in {1..60}; do
+  v=$(curl -s "${ZAP}/JSON/core/view/version/?apikey=${API_KEY}" | jq -r .version 2>/dev/null)
+  [ -n "$v" ] && { echo "[+] ZAP ready: $v"; break; }
+  sleep 1
 done
 
-curl "${ZAP_BASE}/OTHER/core/other/htmlreport/?apikey=${API_KEY}" -o zap-report-mern.html
-echo "[+] MERN Social report saved to zap-report-mern.html"
+# ---- MERN Social (classic spider + ascan) ----
+echo "[*] Spider MERN: ${TARGET_APP}"
+SCANID=$(curl -s "${ZAP}/JSON/spider/action/scan?apikey=${API_KEY}&url=${TARGET_APP}&recurse=true" | jq -r .scan)
+while true; do
+  STATUS=$(curl -s "${ZAP}/JSON/spider/view/status?apikey=${API_KEY}&scanId=${SCANID}" | jq -r .status)
+  echo "spider status: ${STATUS}%"
+  [ "$STATUS" = "100" ] && break
+  sleep 3
+done
 
-# -------------------
-# 2. MONGO-EXPRESS
-# -------------------
-MONGO_URL="https://compose-nginx-1/mongo-express/"
-echo "[*] Starting Active Scan on MONGO-EXPRESS ($MONGO_URL)"
-ASCANID=$(curl -s "${ZAP_BASE}/JSON/ascan/action/scan/?apikey=${API_KEY}&url=${MONGO_URL}&recurse=true&inScopeOnly=false&ignoreCertificateErrors=true" | jq -r .scan)
-wait_for_ascan $ASCANID
+echo "[*] Active scan MERN"
+ASCANID=$(curl -s "${ZAP}/JSON/ascan/action/scan?apikey=${API_KEY}&url=${TARGET_APP}&recurse=true&inScopeOnly=false" | jq -r .scan)
+while true; do
+  STATUS=$(curl -s "${ZAP}/JSON/ascan/view/status?apikey=${API_KEY}&scanId=${ASCANID}" | jq -r .status)
+  echo "ascan status: ${STATUS}%"
+  [ "$STATUS" = "100" ] && break
+  sleep 5
+done
+curl -s "${ZAP}/OTHER/core/other/htmlreport/?apikey=${API_KEY}" -o zap-report-mern.html
+echo "[+] Saved zap-report-mern.html"
 
-curl "${ZAP_BASE}/OTHER/core/other/htmlreport/?apikey=${API_KEY}" -o zap-report-mongo-express.html
-echo "[+] Mongo Express report saved to zap-report-mongo-express.html"
+# ---- Mongo Express (classic spider + ascan) ----
+echo "[*] Spider Mongo-Express: ${TARGET_ME}"
+SCANID=$(curl -s "${ZAP}/JSON/spider/action/scan?apikey=${API_KEY}&url=${TARGET_ME}&recurse=true" | jq -r .scan)
+while true; do
+  STATUS=$(curl -s "${ZAP}/JSON/spider/view/status?apikey=${API_KEY}&scanId=${SCANID}" | jq -r .status)
+  echo "spider status: ${STATUS}%"
+  [ "$STATUS" = "100" ] && break
+  sleep 3
+done
+
+echo "[*] Active scan Mongo-Express"
+ASCANID=$(curl -s "${ZAP}/JSON/ascan/action/scan?apikey=${API_KEY}&url=${TARGET_ME}&recurse=true&inScopeOnly=false" | jq -r .scan)
+while true; do
+  STATUS=$(curl -s "${ZAP}/JSON/ascan/view/status?apikey=${API_KEY}&scanId=${ASCANID}" | jq -r .status)
+  echo "ascan status: ${STATUS}%"
+  [ "$STATUS" = "100" ] && break
+  sleep 5
+done
+curl -s "${ZAP}/OTHER/core/other/htmlreport/?apikey=${API_KEY}" -o zap-report-mongo-express.html
+echo "[+] Saved zap-report-mongo-express.html"
