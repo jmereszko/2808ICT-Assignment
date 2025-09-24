@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:53:29 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 18812
+Connection: keep-alive
+X-DNS-Prefetch-Control: off
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Download-Options: noopen
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Access-Control-Allow-Origin: *
+ETag: W/"497c-f6IjkP+FUCFJ7xBWh3Ryb4TOpJU"
+Vary: Accept-Encoding
+
