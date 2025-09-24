@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/mongo-express/">
+  <meta charset="utf-8">
+  <title>Home - Mongo Express</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="/mongo-express/public/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/mongo-express/public/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/mongo-express/public/css/style.css" rel="stylesheet" />
+
+  <link rel="prefetch" href="/mongo-express/public/img/gears.gif">
+
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    .sidebar-nav {
+      padding: 9px 0;
+    }
+    .sidebar-nav a {
+      display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .tooltip-inner {
+      max-width: 500px;
+    }
+  </style>
+
+  
+</head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="logo-nav">
+        <a href="/mongo-express/">
+          <img src="/mongo-express/public/img/mongo-express-logo.png" />
+        </a>
+      </div>
+      <a class="navbar-brand" href="">Mongo Express</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Database<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      <li><a href="/mongo-express/db/admin/">admin</a></li>
+      
+      <li><a href="/mongo-express/db/config/">config</a></li>
+      
+      <li><a href="/mongo-express/db/local/">local</a></li>
+      
+      <li><a href="/mongo-express/db/mernproject/">mernproject</a></li>
+      
+    </ul>
+  </li>
+
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+  
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header main-title">
+        <h1 id="pageTitle">Mongo Express</h1>
+      </div>
+
+      
+
+      
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div style="display: inline-block;">
+      <h4 style="font-weight: bold;">Databases</h4>
+    </div>
+    
+    <form class="form-inline" method="POST" style="float:right;">
+      <div class="input-group">
+        <input class="form-control" type="text" id="database" name="database" placeholder="Database Name" title="Database Name">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create Database
+          </button>
+        </span>
+      </div>
+    </form>
+    
+    </div>
+  <div class="panel-body no-padding">
+<table class="table table-bordered table-striped table-condensed no-margin">
+  
+  <tr>
+    <td class="col-md-2">
+      <a href="/mongo-express/db/admin/" class="btn btn-success btn-block" >
+        <span class="glyphicon glyphicon-eye-open"></span><br>View
+      </a>
+    </td>
+    <td><h3><a href="/mongo-express/db/admin/">admin</a></h3></td>
+    
+    <td class="col-md-2">
+      <form method="POST" action="/mongo-express/admin" style="margin: 0px;">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="hidden"></button>
+        <button type="button" class="btn btn-danger btn-block deleteButton" database-name="admin" >
+          <span class="glyphicon glyphicon-trash"></span><br>Del
+        </button>
+      </form>
+    </td>
+    
+  </tr>
+  
+  <tr>
+    <td class="col-md-2">
+      <a href="/mongo-express/db/config/" class="btn btn-success btn-block" >
+        <span class="glyphicon glyphicon-eye-open"></span><br>View
+      </a>
+    </td>
+    <td><h3><a href="/mongo-express/db/config/">config</a></h3></td>
+    
+    <td class="col-md-2">
+      <form method="POST" action="/mongo-express/config" style="margin: 0px;">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="hidden"></button>
+        <button type="button" class="btn btn-danger btn-block deleteButton" database-name="config" >
+          <span class="glyphicon glyphicon-trash"></span><br>Del
+        </button>
+      </form>
+    </td>
+    
+  </tr>
+  
+  <tr>
+    <td class="col-md-2">
+      <a href="/mongo-express/db/local/" class="btn btn-success btn-block" >
+        <span class="glyphicon glyphicon-eye-open"></span><br>View
+      </a>
+    </td>
+    <td><h3><a href="/mongo-express/db/local/">local</a></h3></td>
+    
+    <td class="col-md-2">
+      <form method="POST" action="/mongo-express/local" style="margin: 0px;">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="hidden"></button>
+        <button type="button" class="btn btn-danger btn-block deleteButton" database-name="local" >
+          <span class="glyphicon glyphicon-trash"></span><br>Del
+        </button>
+      </form>
+    </td>
+    
+  </tr>
+  
+  <tr>
+    <td class="col-md-2">
+      <a href="/mongo-express/db/mernproject/" class="btn btn-success btn-block" >
+        <span class="glyphicon glyphicon-eye-open"></span><br>View
+      </a>
+    </td>
+    <td><h3><a href="/mongo-express/db/mernproject/">mernproject</a></h3></td>
+    
+    <td class="col-md-2">
+      <form method="POST" action="/mongo-express/mernproject" style="margin: 0px;">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="hidden"></button>
+        <button type="button" class="btn btn-danger btn-block deleteButton" database-name="mernproject" >
+          <span class="glyphicon glyphicon-trash"></span><br>Del
+        </button>
+      </form>
+    </td>
+    
+  </tr>
+  
+</table>
+</div>
+  </div>
+
+<div id="confirm-deletion" class="modal fade" role="dialog" aria-labelledby="confirmDeletionLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete database</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Be careful! You are about to delete whole <strong><span id="modal-database-name"></span></strong> database.
+        </p>
+        <p>
+          <label for="confirmation-input">Type the database name to proceed.</label>
+          <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn btn-danger" id="delete">Delete</button>
+        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--h2>Create Database</h2>
+<form class="well form-inline" method="POST">
+    <div class="form-group">
+      <input class="input-medium" type="text" id="database" name="database" placeholder="Database Name" title="Database Name">
+    </div>
+    <button type="submit" class="btn btn-primary pull-right">
+      <span class="glyphicon glyphicon-plus"></span>
+      Create Database
+    </button>
+</form-->
+
+
+
+<div class="panel panel-default stats">
+  <div class="panel-heading">
+    <h4 style="font-weight: bold;">Server Status</h4>
+  </div>
+<table class="table table-bordered table-striped">
+  <tr>
+    <td class="span2"><strong>Hostname</strong></td>
+    <td class="span3" id="dbHost">37a4e928950d</td>
+    <td class="span2"><strong>MongoDB Version</strong></td>
+    <td class="span3" id="dbVersion">8.0.13</td>
+  </tr>
+  <tr>
+    <td><strong>Uptime</strong></td>
+    <td>6355 seconds </td>
+    <td class="span2"><strong>Node Version</strong></td>
+    <td class="span3" id="nodeVersion">18.20.3</td>
+  </tr>
+  <tr>
+    <td><strong>Server Time</strong></td>
+    <td>Wed, 24 Sep 2025 09:39:25 GMT</td>
+    <td class="span2"><strong>V8 Version</strong></td>
+    <td class="span3" id="v8Version">10.2.154.26-node.37</td>
+  </tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr>
+    <td><strong>Current Connections</strong></td>
+    <td>4</td>
+    <td><strong>Available Connections</strong></td>
+    <td>838856</td>
+  </tr>
+  <tr>
+    <td><strong>Active Clients</strong></td>
+    <td>0</td>
+    <td><strong>Queued Operations</strong></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td><strong>Clients Reading</strong></td>
+    <td>0</td>
+    <td><strong>Clients Writing</strong></td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td><strong>Read Lock Queue</strong></td>
+    <td>0</td>
+    <td><strong>Write Lock Queue</strong></td>
+    <td>0</td>
+  </tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr>
+    <td><strong>Disk Flushes</strong></td>
+    <td></td>
+    <td><strong>Last Flush</strong></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><strong>Time Spent Flushing</strong></td>
+    <td> ms</td>
+    <td><strong>Average Flush Time</strong></td>
+    <td> ms</td>
+  </tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr>
+    <td><strong>Total Inserts</strong></td>
+    <td>0</td>
+    <td><strong>Total Queries</strong></td>
+    <td>40</td>
+  </tr>
+  <tr>
+    <td><strong>Total Updates</strong></td>
+    <td>6</td>
+    <td><strong>Total Deletes</strong></td>
+    <td>0</td>
+  </tr>
+</table>
+</div>
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+<script src="/mongo-express/public/vendor-93f5fc3ae20e0dfd68cb.min.js"></script>
+<script type="text/javascript">
+
+window.ME_SETTINGS = {
+  readOnly: 'false' === 'true',
+  noDelete: 'false' === 'true',
+  codeMirrorEditorTheme: '',
+  baseHref: '/mongo-express/',
+  collapsibleJSON: 'true' === 'true',
+  collapsibleJSONDefaultUnfold: Number.parseInt('1', 10),
+  confirmDelete: 'false' === 'true',
+  dbName: '',
+  collectionName: '',
+  bucketName: '',
+  limit: '',
+  skip: '',
+  totalPages: Math.round('' / '')
+};
+</script>
+
+
+<script src="/mongo-express/public/index-56afe067afbbbde795be.min.js"></script>
+
+
+</body>
+</html>

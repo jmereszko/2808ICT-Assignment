@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:42:15 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 10392
+Connection: keep-alive
+X-Powered-By: Express
+ETag: W/"2898-+KmyIbAqWS7N5/+eAtm5ftQNyYc"
+Set-Cookie: mongo-express=s%3AV5iy35chvxvvsJxHdgUrFiq4AdZBcMJ-.BEMSEzNgKNU9YFc1cl%2FAZJgLgMI00%2Fq2Qhrm%2FxaPCbY; Path=/; HttpOnly
+
