@@ -1,3 +1,8 @@
+# Run ZAP image on the same network
+docker run -u zap --name zap -p 8080:8080 \
+  --network compose_frontend \
+  -i ghcr.io/zaproxy/zaproxy:stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.key=MySecretKey123
+
 #!/bin/bash
 API_KEY="MySecretKey123"
 ZAP_BASE="http://localhost:8080"
