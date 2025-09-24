@@ -15,20 +15,33 @@ wait_for_scan() {
 }
 
 # -------------------
-# 1. MERN-SOCIAL (internal Docker host)
+# 1. MERN-SOCIAL (use AJAX Spider for React)
 # -------------------
 TARGET="https://compose-nginx-1/"
-echo "[*] Starting Spider on MERN-SOCIAL ($TARGET)"
-SCANID=$(curl -s "${ZAP_BASE}/JSON/spider/action/scan/?apikey=${API_KEY}&url=${TARGET}&recurse=true&ignoreCertificateErrors=true" | jq -r .scan)
-wait_for_scan spider $SCANID
+echo "[*] Starting AJAX Spider on MERN-SOCIAL ($TARGET)"
+SCANID=$(curl -s "${ZAP_BASE}/JSON/ajaxSpider/action/scan/?apikey=${API_KEY}&url=${TARGET}" | jq -r .scan)
+
+# Wait for AJAX spider to complete
+while true; do
+  STATUS=$(curl -s "${ZAP_BASE}/JSON/ajaxSpider/view/status/?apikey=${API_KEY}" | jq -r .status)
+  echo "AJAX spider status: $STATUS"
+  [ "$STATUS" = "stopped" ] && break
+  sleep 5
+done
 
 echo "[*] Starting Active Scan on MERN-SOCIAL"
 ASCANID=$(curl -s "${ZAP_BASE}/JSON/ascan/action/scan/?apikey=${API_KEY}&url=${TARGET}&recurse=true&ignoreCertificateErrors=true" | jq -r .scan)
-wait_for_scan ascan $ASCANID
+
+while true; do
+  STATUS=$(curl -s "${ZAP_BASE}/JSON/ascan/view/status/?apikey=${API_KEY}&scanId=${ASCANID}" | jq -r .status)
+  echo "Active scan status: $STATUS%"
+  [ "$STATUS" = "100" ] && break
+  sleep 10
+done
 
 curl "${ZAP_BASE}/OTHER/core/other/htmlreport/?apikey=${API_KEY}" -o zap-report-mern.html
 echo "[+] MERN report saved to zap-report-mern.html"
-
+#
 # -------------------
 # 2. MONGO-EXPRESS (internal Docker host)
 # -------------------
