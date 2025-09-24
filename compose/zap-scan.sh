@@ -1,6 +1,6 @@
 #!/bin/bash
 API_KEY="MySecretKey123"
-TARGET="http://localhost"   # or https://localhost if nginx is TLS-only
+TARGET="https://localhost"   # or https://localhost if nginx is TLS-only
 
 # 1. Spider the site
 SCANID=$(curl -s "http://localhost:8080/JSON/spider/action/scan?apikey=${API_KEY}&url=${TARGET}&recurse=true" | jq -r .scan)
@@ -14,7 +14,8 @@ while true; do
 done
 
 # 2. Active scan
-ASCANID=$(curl -s "http://localhost:8080/JSON/ascan/action/scan?apikey=${API_KEY}&url=${TARGET}&recurse=true" | jq -r .scan)
+ASCANID=$(curl -s "http://localhost:8080/JSON/ascan/action/scan?apikey=${API_KEY}&url=${TARGET}&recurse=true&inScopeOnly=false&scanPolicyName=" | jq -r .scan)
+echo "Active scan started with ID $ASCANID"
 
 # Wait for active scan to finish
 while true; do
