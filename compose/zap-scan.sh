@@ -20,11 +20,11 @@ wait_for_scan() {
 # -------------------
 TARGET="https://${TARGET_IP}/"
 echo "[*] Starting Spider on MERN-SOCIAL ($TARGET)"
-SCANID=$(curl -s "${ZAP_BASE}/JSON/spider/action/scan/?apikey=${API_KEY}&url=${TARGET}&recurse=true" | jq -r .scan)
+SCANID=$(curl -s "${ZAP_BASE}/JSON/spider/action/scan/?apikey=${API_KEY}&url=${TARGET}&recurse=true&ignoreCertificateErrors=true" | jq -r .scan)
 wait_for_scan spider $SCANID
 
 echo "[*] Starting Active Scan on MERN-SOCIAL"
-ASCANID=$(curl -s "${ZAP_BASE}/JSON/ascan/action/scan/?apikey=${API_KEY}&url=${TARGET}&recurse=true" | jq -r .scan)
+ASCANID=$(curl -s "${ZAP_BASE}/JSON/ascan/action/scan/?apikey=${API_KEY}&url=${TARGET}&recurse=true&ignoreCertificateErrors=true" | jq -r .scan)
 wait_for_scan ascan $ASCANID
 
 curl "${ZAP_BASE}/OTHER/core/other/htmlreport/?apikey=${API_KEY}" -o zap-report-mern.html
