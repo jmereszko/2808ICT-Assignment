@@ -1,0 +1,138 @@
+HTTP/1.1 200 OK
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:45:43 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 29933
+Connection: keep-alive
+X-DNS-Prefetch-Control: off
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Download-Options: noopen
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Access-Control-Allow-Origin: *
+ETag: W/"74ed-zt4IfDH66gJH8QalD5oL2tG1Bm8"
+Vary: Accept-Encoding
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:45:43 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 18812
+Connection: keep-alive
+X-DNS-Prefetch-Control: off
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Download-Options: noopen
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Access-Control-Allow-Origin: *
+ETag: W/"497c-f6IjkP+FUCFJ7xBWh3Ryb4TOpJU"
+Vary: Accept-Encoding
+
+HTTP/1.1 400 Bad Request
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:45:43 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 35
+Connection: keep-alive
+X-DNS-Prefetch-Control: off
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Download-Options: noopen
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Access-Control-Allow-Origin: *
+ETag: W/"23-CUnMFpQhq2CGFr+8Abdk14p/90o"
+Vary: Accept-Encoding
+
+HTTP/1.1 400 Bad Request
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:45:43 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 35
+Connection: keep-alive
+X-DNS-Prefetch-Control: off
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Download-Options: noopen
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Access-Control-Allow-Origin: *
+ETag: W/"23-CUnMFpQhq2CGFr+8Abdk14p/90o"
+Vary: Accept-Encoding
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:45:43 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 18812
+Connection: keep-alive
+X-DNS-Prefetch-Control: off
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Download-Options: noopen
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Access-Control-Allow-Origin: *
+ETag: W/"497c-f6IjkP+FUCFJ7xBWh3Ryb4TOpJU"
+Vary: Accept-Encoding
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:45:43 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 27720
+Connection: keep-alive
+X-DNS-Prefetch-Control: off
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Download-Options: noopen
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Access-Control-Allow-Origin: *
+ETag: W/"6c48-+FirG6QMEHPuIWNY9qjBK8N/Q1s"
+Vary: Accept-Encoding
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:45:43 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 30434
+Connection: keep-alive
+X-DNS-Prefetch-Control: off
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Download-Options: noopen
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Access-Control-Allow-Origin: *
+ETag: W/"76e2-mMZk2Ks6eaBSvl/egpSN7yewTlo"
+Vary: Accept-Encoding
+
+HTTP/1.1 200 OK
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:45:43 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 10392
+Connection: keep-alive
+X-Powered-By: Express
+ETag: W/"2898-62R2oz12DzfP2Kmur5AWIb17ekI"
+Set-Cookie: mongo-express=s%3AWbBeUWb067E01hKnszrw3EmpjdAOidEL.bJ%2FvOgRakhPF83uU3YU67BX%2F7kvgrMm1dCvtK024q8E; Path=/; HttpOnly
+
+HTTP/1.1 404 Not Found
+Server: nginx/1.29.1
+Date: Wed, 24 Sep 2025 09:45:43 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 146
+Connection: keep-alive
+X-DNS-Prefetch-Control: off
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Download-Options: noopen
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Access-Control-Allow-Origin: *
+Content-Security-Policy: default-src 'none'
+Vary: Accept-Encoding
+
