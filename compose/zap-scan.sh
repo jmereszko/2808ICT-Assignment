@@ -1,6 +1,6 @@
 #!/bin/bash
 API_KEY="MySecretKey123"
-TARGET="https://localhost"   # or https://localhost if nginx is TLS-only
+TARGET="https://compose-nginx-1"   # or https://compose-nginx-1 if nginx inforces https. This is the name of the nginx network, viewable via: docker inspect nginx | grep -A5 Networks
 
 # 1. Spider the site
 SCANID=$(curl -s "http://localhost:8080/JSON/spider/action/scan?apikey=${API_KEY}&url=${TARGET}&recurse=true" | jq -r .scan)
