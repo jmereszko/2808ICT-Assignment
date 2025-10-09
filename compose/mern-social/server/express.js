@@ -26,6 +26,20 @@ import devBundle from './devBundle'
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
 
+
+import rateLimit from 'express-rate-limit';
+
+const loginLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000,   // 1 minute
+  max: 5,                    // limit each IP to 5 requests per window
+  message: 'Too many attempts, please try again later.',
+  standardHeaders: true,     // adds RateLimit-* headers
+  legacyHeaders: false
+});
+
+app.use('/api/auth/login', loginLimiter);
+
+
 //comment out before building for production
 devBundle.compile(app)
 
